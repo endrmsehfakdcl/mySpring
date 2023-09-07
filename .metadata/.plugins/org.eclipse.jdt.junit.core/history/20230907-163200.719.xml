@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TimeMapperTests.testGetTime2" project="spro00" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testcase name="testGetTime2" classname="com.keduit.persistence.TimeMapperTests" time="0.264"/>
+</testrun>

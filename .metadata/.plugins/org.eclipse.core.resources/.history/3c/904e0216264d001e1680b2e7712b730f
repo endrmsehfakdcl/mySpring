@@ -1,0 +1,8 @@
+package com.keduit.sample;
+
+import org.junit.runner.RunWith;
+
+@RunWith
+public class SampleTests {
+	
+}
