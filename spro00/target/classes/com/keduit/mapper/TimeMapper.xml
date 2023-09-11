@@ -5,6 +5,6 @@
 
 <mapper namespace="com.keduit.mapper.TimeMapper">
 	<select id="getTime2" resultType="string">
-		select sysdate from dual	
+		select sysdate from dual
 	</select>
 </mapper>

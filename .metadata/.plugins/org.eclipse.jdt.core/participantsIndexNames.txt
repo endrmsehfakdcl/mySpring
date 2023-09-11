@@ -7,3 +7,5 @@ D:\mySpring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3804231202.ind
 \spro00\src\main\java
 D:\mySpring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4216075483.index
 \Spro00\src\main\java
+D:\mySpring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4285540224.index
+\spro02\src\main\java
