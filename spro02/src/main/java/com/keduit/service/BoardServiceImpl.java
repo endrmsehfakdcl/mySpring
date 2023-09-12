@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j;
 
-@Service
+@Service("BoardServiceImpl")
 @Log4j
 @RequiredArgsConstructor
 @ToString

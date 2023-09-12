@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardServiceTests {
 
-	@Autowired 
+	@Autowired @Qualifier("BoardServiceImpl")
 	private BoardService service;
 
 	@Test
