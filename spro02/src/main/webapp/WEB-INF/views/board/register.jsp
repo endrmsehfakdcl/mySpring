@@ -33,10 +33,8 @@
 								<input class="form-control" placeholder="글쓴이" name="writer">
 							</div>
 
-							<button type="submit" class="btn btn-default">Submit
-								Button</button>
-							<button type="reset" class="btn btn-default">Reset
-								Button</button>
+							<button type="reset" class="btn btn-danger pull-right">취소</button>
+							<button type="submit" class="btn btn-success pull-right">등록</button>
 						</form>
 					</div>
 

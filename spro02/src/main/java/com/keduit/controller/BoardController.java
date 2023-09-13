@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.keduit.domain.BoardVO;
+import com.keduit.domain.Criteria;
+import com.keduit.domain.PageDTO;
 import com.keduit.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,10 +24,17 @@ public class BoardController {
 
 	private final BoardService service;
 
+//	@GetMapping("/list")
+//	public void list(Model model) {
+//		log.info("list");
+//		model.addAttribute("list", service.getList());
+//	}
+
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
-		model.addAttribute("list", service.getList());
+	public void list(Criteria cri, Model model) {
+		log.info("list : " + cri);
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 123));
 	}
 
 	@GetMapping("/register")
@@ -42,10 +51,11 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
-	@GetMapping("/get")
+	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("bno") Long bno, Model model) {
-		log.info("/get");
+		log.info("/get or /modify");
 		model.addAttribute("board", service.get(bno));
+		log.info(service.get(bno));
 	}
 
 	@PostMapping("/modify")

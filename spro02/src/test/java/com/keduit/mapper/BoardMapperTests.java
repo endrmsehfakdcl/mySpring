@@ -1,5 +1,7 @@
 package com.keduit.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.keduit.domain.BoardVO;
+import com.keduit.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -25,13 +28,26 @@ public class BoardMapperTests {
 	}
 
 	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+
+		cri.setAmount(10);
+		cri.setPageNum(7);
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		list.forEach(board -> log.info(board));
+	}
+
+	@Test
 	public void testInsert() {
 		BoardVO board = new BoardVO();
-		board.setTitle("insert test 코드를 통합 입력");
-		board.setContent("insert test 코드를 통합 입력 내용");
-		board.setWriter("newbie");
-		mapper.insert(board);
-		log.info(board);
+		for (int i = 1; i < 100; i++) {
+
+			board.setTitle("insert test 코드를 통합 입력" + i);
+			board.setContent("insert test 코드를 통합 입력 내용" + i);
+			board.setWriter("newbie" + i);
+			mapper.insert(board);
+			log.info(board);
+		}
 	}
 
 	@Test
@@ -54,7 +70,7 @@ public class BoardMapperTests {
 	@Test
 	public void testDelete() {
 		int result = mapper.delete(2L);
-		log.info("result "+result);
+		log.info("result " + result);
 	}
 
 	@Test
