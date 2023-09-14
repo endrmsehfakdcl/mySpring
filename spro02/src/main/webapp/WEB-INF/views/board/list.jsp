@@ -35,7 +35,7 @@
 						<c:forEach items="${list }" var="board">
 							<tr>
 								<td><c:out value="${board.bno }"></c:out></td>
-								<td><a href="/board/get?bno=${board.bno }">
+								<td><a class="move" href="${board.bno }">
 										<c:out value="${board.title }"></c:out>
 									</a></td>
 								<td><c:out value="${board.writer }"></c:out></td>
@@ -49,12 +49,50 @@
 				</table>
 				<!-- /.table-responsive -->
 
+				<div class="row">
+					<div class="col-lg-12">
+						<nav class="navbar navbar-light bg-light">
+							<form class="form-inline mt-3" id="searchForm"
+								action="/board/list" method="get">
+								<select name="type" class="form-control form-select-lg mb-3 "
+									aria-label="Default select example">
+								<!--<option value="">검색 조건</option>-->
+									<option value="T"
+										<c:out value="${pageMaker.cri.type eq 'T'? 'selected' : ''  }" />>제목</option>
+									<option value="C"
+										<c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : '' }" />>내용</option>
+									<option value="W"
+										<c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : '' }" />>글쓴이</option>
+									<option value="TC"
+										<c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : '' }" />>제목
+										or 내용</option>
+									<option value="TW"
+										<c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : '' }" />>제목
+										or 글쓴이</option>
+									<option value="TCW"
+										<c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : ''  }" />>제목
+										or 내용 or 글쓴이</option>
+								</select>
+								<input name="keyword" class="form-control mr-sm-2" type="search"
+									placeholder="검색조건" aria-label="Search"
+									value='${pageMaker.cri.keyword }'>
+								<input type="hidden" name="pageNum"
+									value="${pageMaker.cri.pageNum }">
+								<input type="hidden" name="amount"
+									value="${pageMaker.cri.amount }">
+								<button class="btn btn-outline-success my-2 my-sm-0"
+									type="submit">검색조건</button>
+							</form>
+						</nav>
+					</div>
+				</div>
+
+
 				<div class="pull-right">
 					<ul class="pagination">
 						<c:if test="${pageMaker.prev}">
-							<li class="paginate_button previous">
-								<a href="${pageMaker.startPage-1 }">Previous</a>
-							</li>
+							<li class="paginate_button previous"><a
+									href="${pageMaker.startPage-1 }">Previous</a></li>
 						</c:if>
 
 						<c:forEach var="num" begin="${pageMaker.startPage }"
@@ -65,9 +103,8 @@
 							</li>
 						</c:forEach>
 						<c:if test="${pageMaker.next }">
-							<li class="paginate_button next">
-								<a href="${pageMaker.endPage + 1 }">Next</a>
-							</li>
+							<li class="paginate_button next"><a
+									href="${pageMaker.endPage + 1 }">Next</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -76,6 +113,9 @@
 					<input type="hidden" name="pageNum"
 						value="${pageMaker.cri.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+					<input type="hidden" name="type" value="${pageMaker.cri.type }">
+					<input type="hidden" name="keyword"
+						value="${pageMaker.cri.keyword }">
 				</form>
 
 
@@ -137,13 +177,57 @@
 						});
 
 						const actionForm = $("#actionForm");
-						$(".paginate_button a").on("click", function(e) {
-							e.preventDefault();
-							console.log("-----------------------page num click------------------------");
-							actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-							actionForm.submit();
-							})
-						});
+						$(".paginate_button a")
+								.on(
+										"click",
+										function(e) {
+											e.preventDefault();
+											console
+													.log("-----------------------page num click------------------------");
+
+											actionForm.find(
+													"input[name='pageNum']")
+													.val($(this).attr("href"));
+											actionForm.attr("action",
+													"/board/list");
+											actionForm.submit();
+										})
+						$(".move")
+								.on(
+										"click",
+										function(e) {
+											e.preventDefault();
+											actionForm
+													.find("input[name='bno']")
+													.remove();
+											actionForm
+													.append("<input type='hidden' name='bno' value='"
+															+ $(this).attr(
+																	"href")
+															+ "'>");
+											console
+													.log("---------------append click------------------");
+											actionForm.attr("action",
+													"/board/get");
+											actionForm.submit();
+										})
+
+					});
+
+	const searchForm = $("#searchForm");
+	$("#searchForm button").on("click", function(e) {
+		//if (!searchForm.find("option:selected").val()) {
+		//	alert("검색 종류를 선택하세요.");
+		//	return false;
+		//}
+
+		if (!searchForm.find("input[name='keyword']").val()) {
+			alert("검색 키워드를 입력하세요.");
+			return false;
+		}
+		searchForm.find("input[name='pageNum']").val(1);
+		searchForm.submit();
+	})
 </script>
 
 

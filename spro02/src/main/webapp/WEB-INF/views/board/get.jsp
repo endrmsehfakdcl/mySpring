@@ -41,13 +41,18 @@
 								value="${board.writer }" readonly>
 						</div>
 
-						<button data-oper="modify" class="btn btn-default pull-right"
-							onclick="location.href='/board/modify?bno=${board.bno}'">수정</button>
-						<button data-oper="list" class="btn btn-info pull-right"
-							onclick="location.href='/board/list'">목록</button>
+						<button data-oper="modify" class="btn btn-default pull-right">수정</button>
+						<button data-oper="list" class="btn btn-info pull-right">목록</button>
+						${cri.pageNum }
 
+						<form id="operform" action="/board/modify" method="get">
+							<input type="hidden" id="bno" name="bno" value="${board.bno }">
+							<input type="hidden" name="pageNum" value="${cri.pageNum }">
+							<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="type" value="${cri.type }">
+							<input type="hidden" name="keyword" value="${cri.keyword }">
+						</form>
 					</div>
-
 				</div>
 				<!-- /.row (nested) -->
 			</div>
@@ -58,5 +63,23 @@
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		const operform = $("#operform");
+
+		$("button[data-oper='modify']").on("click", function(e) {
+			operform.attr("action", "/board/modify").submit();
+		});
+		$("button[data-oper='list']").on("click", function(e) {
+			operform.find("#bno").remove();
+			operform.attr("action", "/board/list");
+			operform.submit();
+
+		})
+	})
+</script>
+
+
 
 <%@include file='../includes/footer.jsp'%>
