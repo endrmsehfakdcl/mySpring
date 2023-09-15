@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Criteria"/>
+		<item key="selection" value="cri.type"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="cri.type"/>
+			<item value="operform"/>
+			<item value="clone"/>
+			<item value="alert"/>
+			<item value="remove"/>
+			<item value="move"/>
 			<item value="criteria"/>
 			<item value="href"/>
 			<item value="ready"/>
@@ -17,12 +23,6 @@
 			<item value="endtable"/>
 			<item value="modify"/>
 			<item value="modal"/>
-			<item value="select"/>
-			<item value="page-wrapper"/>
-			<item value="search"/>
-			<item value="serach"/>
-			<item value="header"/>
-			<item value="well"/>
 		</list>
 		<list key="replacehistory">
 			<item value="/resources"/>

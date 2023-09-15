@@ -2,5 +2,7 @@
 <aop-reference-model>
 <aop-project name="spro00"/>
 <aop-project name="spro01"/>
+<aop-project name="spro03"/>
+<aop-project name="spro04"/>
 <aop-project name="spro02"/>
 </aop-reference-model>
