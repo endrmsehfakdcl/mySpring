@@ -35,8 +35,6 @@ public class ReplyServiceTests {
 		vo.setReply("Reply Service Test");
 		vo.setReplyer("ReplyTester");
 
-		Long rno = service.register(vo);
-		log.info("생성된 댓글 번호 : " + rno);
 	}
 
 }

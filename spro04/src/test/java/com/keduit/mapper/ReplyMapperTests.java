@@ -30,9 +30,9 @@ public class ReplyMapperTests {
 
 	@Test
 	public void testCreate() {
-		IntStream.rangeClosed(1, 10).forEach(i -> {
+		IntStream.rangeClosed(1, 3).forEach(i -> {
 			ReplyVO vo = new ReplyVO();
-			vo.setBno(89L + (long) i);
+			vo.setBno(126L + (long) i);
 			vo.setReply("안녕하세요" + i);
 			vo.setReplyer("ㅇㅇ" + i);
 			mapper.insert(vo);
@@ -41,20 +41,20 @@ public class ReplyMapperTests {
 
 	@Test
 	public void testRead() {
-		Long rno = 2L;
+		Long rno = 42L;
 		ReplyVO vo = mapper.read(rno);
 		log.info(vo);
 	}
 
 	@Test
 	public void testDelete() {
-		Long rno = 2L;
+		Long rno = 43L;
 		mapper.delete(rno);
 	}
 
 	@Test
 	public void testUpdate() {
-		Long rno = 3L;
+		Long rno = 42L;
 		ReplyVO vo = mapper.read(rno);
 		vo.setReply("댓글 수정합니다");
 		int update = mapper.update(vo);
@@ -64,7 +64,8 @@ public class ReplyMapperTests {
 	@Test
 	public void testList() {
 		Criteria cri = new Criteria();
-		List<ReplyVO> replies = mapper.getListWithPaging(cri, 90L);
+		Long bno = 128L;
+		List<ReplyVO> replies = mapper.getListWithPaging(cri, bno);
 		log.info(replies);
 	}
 
