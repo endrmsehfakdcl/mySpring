@@ -30,9 +30,9 @@ public class ReplyMapperTests {
 
 	@Test
 	public void testCreate() {
-		IntStream.rangeClosed(1, 3).forEach(i -> {
+		IntStream.rangeClosed(1, 100).forEach(i -> {
 			ReplyVO vo = new ReplyVO();
-			vo.setBno(126L + (long) i);
+			vo.setBno(128L);
 			vo.setReply("안녕하세요" + i);
 			vo.setReplyer("ㅇㅇ" + i);
 			mapper.insert(vo);
@@ -64,6 +64,14 @@ public class ReplyMapperTests {
 	@Test
 	public void testList() {
 		Criteria cri = new Criteria();
+		Long bno = 128L;
+		List<ReplyVO> replies = mapper.getListWithPaging(cri, bno);
+		log.info(replies);
+	}
+	
+	@Test
+	public void testList2() {
+		Criteria cri = new Criteria(2, 10);
 		Long bno = 128L;
 		List<ReplyVO> replies = mapper.getListWithPaging(cri, bno);
 		log.info(replies);

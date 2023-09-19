@@ -26,15 +26,15 @@
 	</update>
 
 	<select id="getListWithPaging" resultType="com.keduit.domain.ReplyVO">
+	<![CDATA[
 		select rno, bno, reply, replyer, replydate, updatedate
-		from (
-		select /*+Index_asc(reply pk_reply) */ rownum rn, rno, bno, reply, replyer, replydate, updatedate
-		from reply where
-		<![CDATA[
-		rownum <= #{cri.pageNum} * #{cri.amount} and bno = #{bno})
-		where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		from 
+		(select /*+Index(reply idx_reply) */ rownum rn, rno, bno, reply, replyer, replydate, updatedate
+		from reply 
+		where bno = #{bno} and rno > 0
+						   and rownum <= #{cri.pageNum} * #{cri.amount}
+		) where rn > (#{cri.pageNum} - 1) * #{cri.amount}
 		]]>
-		order by rno asc
 	</select>
 
 
