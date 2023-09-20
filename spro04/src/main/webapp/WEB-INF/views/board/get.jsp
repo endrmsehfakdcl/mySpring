@@ -209,7 +209,7 @@ $(document).ready(function() {
 			str += "<li class='page-item'><a class='page-link' href='" + (startNum-1) +"'>이전</a></li>";
 		}
 		
-		for (let i=startNum; i<endNum; i++) {
+		for (let i=startNum; i<=endNum; i++) {
 			const active = pageNum == i ? "active" : "";
 			str += "<li class='page-item " + active + "'><a class='page-link' href='" + i + "'>"
 				+ i +"</a></li>";
@@ -224,9 +224,21 @@ $(document).ready(function() {
 		console.log("str: ", str);
 		
 		replyPageFooter.html(str);
-		
-		
 	}
+	
+	// 댓글 페이지 이동
+	replyPageFooter.on("click", "li a", function(e){
+		e.preventDefault();
+		console.log("page number click ");
+		const targetPage = $(this).attr("href");
+		console.log("target page Number: ", targetPage);
+		
+		// 새로운 댓글 이후 마지막 페이지로 이동
+		pageNum = targetPage;
+		showList(pageNum);
+	})
+	
+	
 	
 	// 댓글 모달 처리
 	const modal = $("#myModal");
@@ -246,7 +258,7 @@ $(document).ready(function() {
 		modalRegisterBtn.show();
 		$(".modal").modal("show");
 	});
-	
+// 댓글 조회 클릭 이벤트 처리
 	$(".chat").on("click", "li", function(e) {
 		const rno = $(this).data("rno");
 		console.log("chat rno: ", rno);
@@ -276,11 +288,11 @@ $(document).ready(function() {
 		
 		replyService.add(reply, function(result){
 			alert(result);
+			modal.find("input").val("");
+			modal.modal("hide");
+			showList(-1);
 		});
 		
-		modal.find("input").val("");
-		modal.modal("hide");
-		showList(-1);
 	});
 	
 	modalModBtn.on("click", function(e){

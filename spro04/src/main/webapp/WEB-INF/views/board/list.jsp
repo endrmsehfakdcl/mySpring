@@ -36,7 +36,8 @@
 							<tr>
 								<td><c:out value="${board.bno }"></c:out></td>
 								<td><a class="move" href="${board.bno }">
-										<c:out value="${board.title }"></c:out>
+										<c:out value="${board.title } "></c:out>
+										<b>[${board.replyCnt }]</b>
 									</a></td>
 								<td><c:out value="${board.writer }"></c:out></td>
 								<td><fmt:formatDate value="${board.regdate }"
